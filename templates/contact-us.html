@@ -1,0 +1,99 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+{% block title %}Aloqa|xasanbayev.uz{% endblock %}
+
+{% block content %}
+
+<section class="section contact">
+
+    <header class="contact-header text-center">
+        <h2 class="section-title">Biz bilan aloqa</h2>
+        <p class="subtitle">
+            Taklif, savol yoki hamkorlik uchun quyidagi formani to'ldiring
+        </p>
+    </header>
+
+    {% if messages %}
+    <div class="messages-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="contact-wrapper container">
+
+        <form method="post" class="contact-form">
+            {% csrf_token %}
+
+            <div class="form-row">
+                <input type="text" name="name" placeholder="Ismingiz..." required>
+                <input type="email" name="email" placeholder="Email manzil..." required>
+            </div>
+
+            <div class="form-row">
+                <input type="tel" name="phone" placeholder="Telefon raqam..." required>
+                <input type="text" name="subject" placeholder="Xabar mavzusi..." required>
+            </div>
+
+            <textarea name="message" required rows="6" placeholder="Xabaringizni yozing..."></textarea>
+
+            <button type="submit" class="btn submit-btn">
+                Xabarni yuborish
+            </button>
+        </form>
+
+        <aside class="contact-info">
+            <h3>Bog'lanish ma'lumotlari</h3>
+            <ul>
+                <li><strong>Email:</strong>xasanbayevturdiali92@gmail.com</li>
+                <li><strong>Telefon:</strong>+998 88 416 20 60</li>
+                <li>
+                    <strong>
+                        <i class="fa-brands fa-telegram"></i>
+                        Telegram:
+                    </strong>
+                    <a href="https://t.me/turdialixasanbayev" target="_blank">
+                        @turdialixasanbayev
+                    </a>
+                </li>
+
+                <li><strong>Manzil:</strong> Bekobod, Toshkent</li>
+            </ul>
+
+            <p class="contact-note">
+                Xabaringiz imkon qadar tezroq ko'rib chiqiladi
+            </p>
+        </aside>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const alerts = document.querySelectorAll(".alert");
+
+        alerts.forEach((alert) => {
+            setTimeout(() => {
+                alert.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+                alert.style.opacity = "0";
+                alert.style.transform = "translateY(-10px)";
+
+                setTimeout(() => {
+                    alert.remove();
+                }, 500);
+            }, 3000);
+        });
+    });
+</script>
+
+{% endblock %}

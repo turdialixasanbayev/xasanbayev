@@ -1,0 +1,23 @@
+{% load static %}
+
+<header class="header">
+    <div class="container navbar">
+        <h1 class="logo">xasanbayev<span>.uz</span></h1>
+        <nav class="nav-links">
+            <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Bosh
+                sahifa</a>
+            <a href="{% url 'about' %}"
+                class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">Haqida</a>
+            <a href="{% url 'skills' %}"
+                class="{% if request.resolver_match.url_name == 'skills' %}active{% endif %}">Ko'nikmalar</a>
+            <a href="{% url 'projects' %}"
+                class="{% if request.resolver_match.url_name == 'projects' %}active{% endif %}">Loyihalar</a>
+            <a href="{% url 'articles' %}"
+                class="{% if request.resolver_match.url_name == 'articles' %}active{% endif %}">Maqolalar</a>
+            <a href="{% url 'contact-us' %}"
+                class="{% if request.resolver_match.url_name == 'contact-us' %}active{% endif %}">Aloqa</a>
+            <a href="{% url 'resume' %}"
+                class="{% if request.resolver_match.url_name == 'resume' %}active{% endif %}">Resume</a>
+        </nav>
+    </div>
+</header>

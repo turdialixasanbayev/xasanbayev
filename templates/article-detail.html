@@ -1,0 +1,35 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+{% block title %}{{ article.name }}|xasanbayev.uz{% endblock %}
+
+{% block content %}
+
+<article class="section blog-detail">
+
+    <header class="blog-header">
+        <h1 class="blog-title">{{ article.name }}</h1>
+
+        <div class="blog-detail-meta">
+            <span>📅 {{ article.created_at|date }}</span>
+            <span>🏷 {{ article.category }}</span>
+            <span>👁️ {{ article.views }} marta ko'rildi</span>
+            <span>✍️ {{ article.author.get_full_name|default:article.author.username }}</span>
+        </div>
+    </header>
+
+    <section class="blog-content">
+        <p>{{ article.description }}</p>
+        {% if article.image %}
+        <img src="{{ article.image.url }}" alt="{{ article.name }}" class="blog-main-img">
+        {% endif %}
+    </section>
+
+    <footer class="blog-footer">
+        <a href="{% url 'articles' %}" class="btn outline">← Barcha maqolalar</a>
+    </footer>
+
+</article>
+
+{% endblock %}

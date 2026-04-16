@@ -1,0 +1,41 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+{% block title %}Resume|xasanbayev.uz{% endblock %}
+
+{% block content %}
+
+<section class="section resume container">
+
+    <header class="resume-header text-center">
+        <h1 class="section-title">Resume</h1>
+        <p class="subtitle">
+            Tajriba, bilim va texnologiyalarimning qisqacha ko'rinishi
+        </p>
+    </header>
+
+    <section class="resume-summary">
+        <p>
+            Python dasturchi sifatida zamonaviy backend tizimlar va REST API'lar yarataman.
+            Django ekotizimi orqali yuqori samaradorlikka ega, barqaror va kengaytiriladigan
+            yechimlar ishlab chiqishga e'tibor qarataman
+        </p>
+    </section>
+
+    <section class="resume-actions">
+        <a class="btn" href="{% static 'main/doc/resume.pdf' %}" download>
+            📥 Yuklash CV (PDF)
+        </a>
+    </section>
+
+    <section class="resume-note">
+        <p>
+            Agar batafsil ma'lumot yoki suhbat kerak bo'lsa,
+            <a href="{% url 'contact-us' %}">Aloqa</a> sahifasi orqali bog'lanishingiz mumkin
+        </p>
+    </section>
+
+</section>
+
+{% endblock %}

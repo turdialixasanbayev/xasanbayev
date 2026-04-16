@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+{% block title %}Ko'nikmalar|xasanbayev.uz{% endblock %}
+
+{% block content %}
+
+<section class="section skills-section container">
+
+    <header class="section-header text-center">
+        <h1 class="section-title">Ko'nikmalar</h1>
+        <p class="subtitle">
+            Ish jarayonida foydalangan texnologiyalarim va vositalarim
+        </p>
+    </header>
+
+    <ul class="skill-list">
+        {% for skill in skills %}
+        <li class="skill-item">{{ skill.name }}</li>
+        {% endfor %}
+    </ul>
+
+</section>
+
+{% endblock %}

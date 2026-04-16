@@ -1,0 +1,41 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+{% block title %}Maqolalar|xasanbayev.uz{% endblock %}
+
+{% block content %}
+
+<section class="section blog-hero">
+    <div class="container text-center">
+        <h2 class="section-title">Maqolalar</h2>
+        <p class="subtitle">
+            Loyihalarda o'rganilgan tajribalar
+        </p>
+    </div>
+</section>
+
+<section class="section blog-list container">
+    {% for article in articles %}
+    <article class="blog-card">
+        <div class="blog-meta">
+            <span class="blog-date">📅 {{ article.created_at|date }}</span>
+            <span class="blog-tag">🏷 {{ article.category }}</span>
+        </div>
+
+        <h3 class="blog-title">
+            <a href="{{ article.get_absolute_url }}">{{ article.name }}</a>
+        </h3>
+
+        <p class="blog-excerpt">
+            {{ article.description|slice:":125" }}
+        </p>
+
+        <a class="read-more btn outline" href="{{ article.get_absolute_url }}">
+            Batafsil o'qish →
+        </a>
+    </article>
+    {% endfor %}
+</section>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+{% block title %}404|xasanbayev.uz{% endblock %}
+
+{% block content %}
+
+<section class="section error-page">
+    <div class="container error-container">
+        <h1 class="error-code">404</h1>
+        <h2 class="error-title">Sahifa topilmadi!</h2>
+        <p class="error-text">
+            Voy! Bu sahifa yo'qdek 😅 Balki u o'chirilgan yoki siz noto'g'ri manzilga kirdingiz
+        </p>
+        <a href="{% url 'home' %}" class="btn">🏠 Bosh sahifaga qaytish</a>
+    </div>
+</section>
+
+{% endblock %}

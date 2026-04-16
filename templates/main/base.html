@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Turdiali Xasanbayev - Python Django developer. Web ilovalar, API va scalable tizimlar.">
+    <meta name="keywords" content="python, django, drf, backend, web developer, xasanbayev">
+    <meta name="author" content="Turdiali Xasanbayev">
+    <meta property="og:title" content="Xasanbayev Portfolio">
+    <meta property="og:description" content="Python Django developer portfolio">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xasanbayev.uz">
+    <meta name="robots" content="index, follow">
+    <title>{% block title %}xasanbayev.uz{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+    <link rel="icon" href="{% static 'main/img/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="canonical" href="https://xasanbayev.uz">
+</head>
+
+<body>
+
+    {% include 'main/header.html' %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include 'main/footer.html' %}
+
+    {% block extra_js %}{% endblock %}
+
+</body>
+
+</html>

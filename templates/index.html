@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+{% block title %}Bosh sahifa|xasanbayev.uz{% endblock %}
+
+{% block content %}
+
+<section class="hero hero-layout section container">
+
+    <div class="hero-text">
+        <h1 class="hero-title">
+            Salom, men <span>Turdiali Xasanbayev</span>
+        </h1>
+
+        <p class="hero-subtitle">
+            Tezkor, kengaytiriladigan va ishonchli web ilovalar yarataman <br>
+            Python • Django • DRF • REST API
+        </p>
+
+        <p class="hero-desc">
+            Yuqori samaradorlikka ega backend tizimlar va REST API'lar yarataman.
+            Django ekotizimi orqali barqaror va kengaytiriladigan loyihalar ustida ishlayman
+        </p>
+
+        <div class="buttons">
+            <a class="btn" href="{% url 'projects' %}">Loyihalar</a>
+            <a class="btn outline" href="{% url 'contact-us' %}">Aloqa</a>
+        </div>
+    </div>
+
+    <div class="hero-image">
+        <img src="{% static 'main/img/image.png' %}" alt="Turdiali Xasanbayev">
+    </div>
+
+</section>
+
+{% endblock %}
