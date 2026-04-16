@@ -36,8 +36,8 @@
             </div>
 
             <div class="form-row">
-                <input type="tel" name="phone" placeholder="Telefon raqam..." required>
-                <input type="text" name="subject" placeholder="Xabar mavzusi..." required>
+                <input type="tel" name="phone" placeholder="Telefon raqam...">
+                <input type="text" name="subject" placeholder="Xabar mavzusi...">
             </div>
 
             <textarea name="message" required rows="6" placeholder="Xabaringizni yozing..."></textarea>
@@ -80,18 +80,17 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const alerts = document.querySelectorAll(".alert");
+        const messages = document.querySelectorAll(".alert");
 
-        alerts.forEach((alert) => {
+        messages.forEach((msg) => {
             setTimeout(() => {
-                alert.style.transition = "opacity 0.5s ease, transform 0.5s ease";
-                alert.style.opacity = "0";
-                alert.style.transform = "translateY(-10px)";
+                msg.style.transition = "opacity 0.5s ease";
+                msg.style.opacity = "0";
 
                 setTimeout(() => {
-                    alert.remove();
-                }, 500);
-            }, 3000);
+                    msg.remove();
+                }, 500); // fade tugagach DOMdan o‘chirish
+            }, 3000); // 3 soniya kutadi
         });
     });
 </script>

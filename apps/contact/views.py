@@ -9,13 +9,11 @@ class ContactPageView(View):
         return render(request, 'contact-us.html')
 
     def post(self, request):
-        data = request.POST
-
-        name = data.get('name')
-        email = data.get('email')
-        phone = data.get('phone', '')
-        subject = data.get('subject', '')
-        message = data.get('message')
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone', '')
+        subject = request.POST.get('subject', '')
+        message = request.POST.get('message')
 
         if name and email and message:
             ContactUS.objects.create(
