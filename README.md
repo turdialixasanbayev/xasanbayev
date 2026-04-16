@@ -88,8 +88,9 @@ Create `.env` file:
 
 ```
 SECRET_KEY=your_secret_key
-DEBUG=True
-ALLOWED_HOSTS=127.0.0.1,localhost
+DEBUG=your_debug
+ALLOWED_HOSTS=your_allowed_hosts
+CSRF_TRUSTED_ORIGINS=your_csrf_trusted_origins
 DATABASE_URL=your_database_url
 ```
 
