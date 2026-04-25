@@ -2,92 +2,344 @@
 
 {% load static %}
 
-{% block title %}Haqida|xasanbayev.uz{% endblock %}
+{% block title %}Haqida | xasanbayev.uz{% endblock %}
+
+{% block extra_css %}
+
+<style>
+    .about {
+        padding: 5rem 0;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+        margin-bottom: 4rem;
+    }
+
+    .page-label {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .page-label::before {
+        content: '';
+        display: inline-block;
+        width: 28px;
+        height: 1px;
+        background: var(--accent);
+    }
+
+    .page-title {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: var(--text-primary);
+        margin-bottom: 0;
+    }
+
+    /* ── CARDS ── */
+    .about-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 2rem;
+        height: 100%;
+        transition: border-color 0.2s ease;
+    }
+
+    .about-card:hover {
+        border-color: rgba(0, 255, 136, 0.2);
+    }
+
+    .card-label {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1.25rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .card-label i {
+        font-size: 0.7rem;
+    }
+
+    .card-title {
+        font-family: var(--font-display);
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+        letter-spacing: -0.02em;
+    }
+
+    .card-text {
+        font-family: var(--font-mono);
+        font-size: 0.84rem;
+        color: #888;
+        line-height: 1.9;
+        margin-bottom: 0;
+    }
+
+    .card-text strong {
+        color: var(--text-primary);
+        font-weight: 500;
+    }
+
+    .card-text a {
+        color: var(--accent);
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0, 255, 136, 0.3);
+        transition: border-color 0.2s;
+    }
+
+    .card-text a:hover {
+        border-color: var(--accent);
+    }
+
+    /* ── INFO LIST ── */
+    .info-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .info-list li {
+        font-family: var(--font-mono);
+        font-size: 0.84rem;
+        color: #888;
+        display: flex;
+        gap: 0.5rem;
+        align-items: baseline;
+    }
+
+    .info-list li strong {
+        color: var(--text-primary);
+        font-weight: 500;
+        min-width: 130px;
+        flex-shrink: 0;
+    }
+
+    /* ── CONTACT LIST ── */
+    .contact-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+    }
+
+    .contact-list li {
+        font-family: var(--font-mono);
+        font-size: 0.84rem;
+        color: #888;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .contact-list li .contact-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        background: var(--accent-dim);
+        border: 1px solid rgba(0, 255, 136, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent);
+        font-size: 0.8rem;
+        flex-shrink: 0;
+    }
+
+    .contact-list li a {
+        color: var(--accent);
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0, 255, 136, 0.3);
+        transition: border-color 0.2s;
+    }
+
+    .contact-list li a:hover {
+        border-color: var(--accent);
+    }
+
+    .contact-list li span {
+        color: var(--text-primary);
+    }
+
+    /* ── EDUCATION CARD ── */
+    .edu-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        background: var(--accent-dim);
+        border: 1px solid rgba(0, 255, 136, 0.2);
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        margin-bottom: 1rem;
+        width: fit-content;
+    }
+
+    @media (max-width: 767px) {
+        .about {
+            padding: 3rem 0;
+        }
+
+        .info-list li {
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+
+        .info-list li strong {
+            min-width: unset;
+        }
+    }
+</style>
+
+{% endblock %}
 
 {% block content %}
 
-<section class="section about">
+<section class="about">
+    <div class="container">
 
-    <header class="about-header">
-        <h2 class="section-title">Men haqimda</h2>
-        <p class="subtitle">
-            Python Dasturchisi • Backend & Web (Django, DRF)
-        </p>
-    </header>
+        <!-- Page Header -->
+        <div class="page-header">
+            <p class="page-label">Tanishuv</p>
+            <h1 class="page-title">Men haqimda</h1>
+        </div>
 
-    <section class="about-intro">
-        <p>
-            Salom, men <strong>Xasanbayev Turdiali Axbarali o'g'li</strong>.
-            Men Python dasturlash tilida turli yo'nalishlarda ishlovchi dasturchiman.
-            Asosan <strong>Django</strong> va <strong>Django Rest Framework</strong>
-            yordamida web ilovalar va REST API'lar ishlab chiqaman.
+        <div class="row g-4">
 
-            Bundan tashqari, ma'lumotlar bazalari bilan ishlash, loyihalarni serverga deploy qilish
-            va backend arxitekturasini yaratish bo'yicha tajribaga egaman
-        </p>
-    </section>
+            <!-- Intro -->
+            <div class="col-12">
+                <div class="about-card">
+                    <p class="card-label"><i class="fa-regular fa-user"></i> Kirish</p>
+                    <p class="card-text">
+                        Salom, men <strong>Xasanbayev Turdiali Axbarali o'g'li</strong>.
+                        Men Python dasturlash tilida turli yo'nalishlarda ishlovchi dasturchiman.
+                        Asosan <strong>Django</strong> va <strong>Django Rest Framework</strong>
+                        yordamida web ilovalar va REST API'lar ishlab chiqaman.
+                        Bundan tashqari, ma'lumotlar bazalari bilan ishlash, loyihalarni serverga deploy qilish
+                        va backend arxitekturasini yaratish bo'yicha tajribaga egaman.
+                    </p>
+                </div>
+            </div>
 
-    <section class="about-info">
-        <h3 class="subsection-title">Shaxsiy ma'lumotlar</h3>
-        <ul class="info-list">
-            <li><strong>Tug'ilgan sana:</strong> 01.09.2007</li>
-            <li><strong>Yosh:</strong> 19</li>
-            <li><strong>Manzil:</strong> Bekobod, Toshkent</li>
-        </ul>
-    </section>
+            <!-- Shaxsiy ma'lumotlar + Ta'lim -->
+            <div class="col-12 col-md-6">
+                <div class="about-card">
+                    <p class="card-label"><i class="fa-regular fa-id-card"></i> Shaxsiy ma'lumotlar</p>
+                    <ul class="info-list">
+                        <li>
+                            <strong>Tug'ilgan sana:</strong>
+                            <span>01.09.2007</span>
+                        </li>
+                        <li>
+                            <strong>Yosh:</strong>
+                            <span>19</span>
+                        </li>
+                        <li>
+                            <strong>Manzil:</strong>
+                            <span>Bekobod, Toshkent</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-    <section class="about-education">
-        <h3 class="subsection-title">Ta'lim</h3>
-        <p>
-            <strong>Guliston Davlat Universiteti</strong><br>
-            Axborot tizimlari va texnologiyalari yo'nalishi<br>
-            1-kurs talabasi <em>(2025 — hozirda)</em>
-        </p>
-    </section>
+            <div class="col-12 col-md-6">
+                <div class="about-card">
+                    <p class="card-label"><i class="fa-solid fa-graduation-cap"></i> Ta'lim</p>
+                    <div class="edu-badge">
+                        <i class="fa-regular fa-calendar"></i> 2025 — hozirda
+                    </div>
+                    <p class="card-title">Guliston Davlat Universiteti</p>
+                    <p class="card-text">
+                        Axborot tizimlari va texnologiyalari yo'nalishi<br>
+                        <span style="color: var(--text-muted);">1-kurs talabasi</span>
+                    </p>
+                </div>
+            </div>
 
-    <section class="about-experience">
-        <h3 class="subsection-title">Tajriba va yo'nalish</h3>
-        <p>
-            Python dasturlash tilini kurslar orqali o'rganib, hozirda bu yo'nalishda
-            faol rivojlanib bormoqdaman. Universitet talabasi sifatida
-            nazariy bilimlarimni amaliyot bilan mustahkamlashga e'tibor qarataman.
+            <!-- Tajriba -->
+            <div class="col-12">
+                <div class="about-card">
+                    <p class="card-label"><i class="fa-solid fa-code"></i> Tajriba va yo'nalish</p>
+                    <p class="card-text mb-3">
+                        Python dasturlash tilini kurslar orqali o'rganib, hozirda bu yo'nalishda
+                        faol rivojlanib bormoqdaman. Universitet talabasi sifatida
+                        nazariy bilimlarimni amaliyot bilan mustahkamlashga e'tibor qarataman.
+                        Backend dasturlashga qiziqaman va <strong>Django</strong> hamda
+                        <strong>REST API</strong> orqali real loyihalar ustida ishlayman.
+                    </p>
+                    <p class="card-text">
+                        Hozircha rasmiy ish tajribam yo'q, ammo barcha qilgan loyihalarim
+                        <a href="https://github.com/turdialixasanbayev/" target="_blank">
+                            GitHub profilim
+                        </a>
+                        orqali ochiq holda joylangan.
+                    </p>
+                </div>
+            </div>
 
-            Backend dasturlashga qiziqaman va <strong>Django</strong> hamda
-            <strong>REST API</strong> orqali real loyihalar ustida ishlayman
-        </p>
-        <p>
-            Hozircha rasmiy ish tajribam yo'q, ammo barcha qilgan loyihalarim
-            <a href="https://github.com/turdialixasanbayev/" target="_blank">
-                GitHub profilim
-            </a>
-            orqali ochiq holda joylangan
-        </p>
-    </section>
+            <!-- Aloqa -->
+            <div class="col-12">
+                <div class="about-card">
+                    <p class="card-label"><i class="fa-regular fa-address-book"></i> Aloqa</p>
+                    <ul class="contact-list">
 
-    <section class="about-contact">
-        <h3 class="subsection-title">Aloqa</h3>
-        <ul class="contact-list">
-            <li><strong>Telefon:</strong> +998 88 416 20 60</li>
-            <li><strong>Email:</strong> xasanbayevturdiali92@gmail.com</li>
+                        <li>
+                            <span class="contact-icon"><i class="fa-solid fa-phone"></i></span>
+                            <span>+998 88 416 20 60</span>
+                        </li>
 
-            <li>
-                <strong><i class="fa-brands fa-telegram"></i> Telegram:</strong>
-                <a href="https://t.me/turdialixasanbayev" target="_blank">@turdialixasanbayev</a>
-            </li>
+                        <li>
+                            <span class="contact-icon"><i class="fa-regular fa-envelope"></i></span>
+                            <a href="mailto:xasanbayevturdiali92@gmail.com">xasanbayevturdiali92@gmail.com</a>
+                        </li>
 
-            <li>
-                <strong><i class="fa-brands fa-instagram"></i> Instagram:</strong>
-                <a href="https://instagram.com/turdiali_xasanbayev" target="_blank">@turdiali_xasanbayev</a>
-            </li>
+                        <li>
+                            <span class="contact-icon"><i class="fa-brands fa-telegram"></i></span>
+                            <a href="https://t.me/turdialixasanbayev" target="_blank">@turdialixasanbayev</a>
+                        </li>
 
-            <li>
-                <strong><i class="fa-brands fa-github"></i> GitHub:</strong>
-                <a href="https://github.com/turdialixasanbayev/" target="_blank">github.com/turdialixasanbayev</a>
-            </li>
-        </ul>
+                        <li>
+                            <span class="contact-icon"><i class="fa-brands fa-instagram"></i></span>
+                            <a href="https://instagram.com/turdiali_xasanbayev" target="_blank">@turdiali_xasanbayev</a>
+                        </li>
 
-    </section>
+                        <li>
+                            <span class="contact-icon"><i class="fa-brands fa-github"></i></span>
+                            <a href="https://github.com/turdialixasanbayev/"
+                                target="_blank">github.com/turdialixasanbayev</a>
+                        </li>
 
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </section>
 
 {% endblock %}

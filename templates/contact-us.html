@@ -2,76 +2,354 @@
 
 {% load static %}
 
-{% block title %}Aloqa|xasanbayev.uz{% endblock %}
+{% block title %}Aloqa | xasanbayev.uz{% endblock %}
+
+{% block extra_css %}
+
+<style>
+    .contact {
+        padding: 5rem 0;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+        margin-bottom: 3.5rem;
+        text-align: center;
+    }
+
+    .page-label {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .page-label::before,
+    .page-label::after {
+        content: '';
+        display: inline-block;
+        width: 28px;
+        height: 1px;
+        background: var(--accent);
+    }
+
+    .page-title {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: var(--text-primary);
+        margin-bottom: 0.75rem;
+    }
+
+    .page-subtitle {
+        font-family: var(--font-mono);
+        font-size: 0.84rem;
+        color: var(--text-muted);
+    }
+
+    /* ── MESSAGES ── */
+    .messages-container {
+        max-width: 700px;
+        margin: 0 auto 2rem;
+    }
+
+    .alert {
+        font-family: var(--font-mono);
+        font-size: 0.82rem;
+        border-radius: 6px;
+        border: 1px solid;
+        padding: 0.85rem 1.25rem;
+    }
+
+    .alert-success {
+        background: rgba(0, 255, 136, 0.08);
+        border-color: rgba(0, 255, 136, 0.25);
+        color: var(--accent);
+    }
+
+    .alert-error,
+    .alert-danger {
+        background: rgba(255, 80, 80, 0.08);
+        border-color: rgba(255, 80, 80, 0.25);
+        color: #ff6b6b;
+    }
+
+    .alert-info {
+        background: rgba(100, 180, 255, 0.08);
+        border-color: rgba(100, 180, 255, 0.2);
+        color: #7ab8ff;
+    }
+
+    /* ── CARD ── */
+    .contact-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 2rem;
+        height: 100%;
+        transition: border-color 0.2s ease;
+    }
+
+    .contact-card:hover {
+        border-color: rgba(0, 255, 136, 0.2);
+    }
+
+    .card-label {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    /* ── FORM ── */
+    .form-control-dark {
+        background: var(--bg-secondary) !important;
+        border: 1px solid var(--border) !important;
+        border-radius: 5px !important;
+        color: var(--text-primary) !important;
+        font-family: var(--font-mono) !important;
+        font-size: 0.84rem !important;
+        padding: 0.75rem 1rem !important;
+        transition: border-color 0.2s ease !important;
+    }
+
+    .form-control-dark::placeholder {
+        color: var(--text-muted) !important;
+    }
+
+    .form-control-dark:focus {
+        outline: none !important;
+        box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.1) !important;
+        border-color: rgba(0, 255, 136, 0.4) !important;
+        background: var(--bg-secondary) !important;
+    }
+
+    .btn-submit {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--bg-primary);
+        background-color: var(--accent);
+        border: none;
+        padding: 0.75rem 2rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .btn-submit:hover {
+        opacity: 0.85;
+        transform: translateY(-2px);
+    }
+
+    /* ── CONTACT INFO ── */
+    .info-title {
+        font-family: var(--font-display);
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        letter-spacing: -0.02em;
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-info-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .contact-info-list li {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        font-family: var(--font-mono);
+        font-size: 0.84rem;
+        color: #888;
+    }
+
+    .contact-info-list li .icon-box {
+        width: 34px;
+        height: 34px;
+        border-radius: 6px;
+        background: var(--accent-dim);
+        border: 1px solid rgba(0, 255, 136, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent);
+        font-size: 0.8rem;
+        flex-shrink: 0;
+    }
+
+    .contact-info-list li a {
+        color: var(--accent);
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0, 255, 136, 0.3);
+        transition: border-color 0.2s;
+    }
+
+    .contact-info-list li a:hover {
+        border-color: var(--accent);
+    }
+
+    .contact-note {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        padding: 1rem;
+        background: var(--accent-dim);
+        border: 1px solid rgba(0, 255, 136, 0.12);
+        border-radius: 6px;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6rem;
+        line-height: 1.7;
+        margin-bottom: 0;
+    }
+
+    .contact-note i {
+        color: var(--accent);
+        margin-top: 0.15rem;
+        flex-shrink: 0;
+    }
+
+    @media (max-width: 767px) {
+        .contact {
+            padding: 3rem 0;
+        }
+    }
+</style>
+
+{% endblock %}
 
 {% block content %}
 
-<section class="section contact">
+<section class="contact">
+    <div class="container">
 
-    <header class="contact-header text-center">
-        <h2 class="section-title">Biz bilan aloqa</h2>
-        <p class="subtitle">
-            Taklif, savol yoki hamkorlik uchun quyidagi formani to'ldiring
-        </p>
-    </header>
-
-    {% if messages %}
-    <div class="messages-container">
-        {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-            {{ message }}
+        <!-- Page Header -->
+        <div class="page-header">
+            <p class="page-label">Muloqot</p>
+            <h1 class="page-title">Biz bilan aloqa</h1>
+            <p class="page-subtitle">Taklif, savol yoki hamkorlik uchun quyidagi formani to'ldiring</p>
         </div>
-        {% endfor %}
-    </div>
-    {% endif %}
 
-    <div class="contact-wrapper container">
+        <!-- Django messages -->
+        {% if messages %}
+        <div class="messages-container">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                <i class="fa-solid fa-circle-info me-2"></i>{{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
 
-        <form method="post" class="contact-form">
-            {% csrf_token %}
+        <div class="row g-4 align-items-start">
 
-            <div class="form-row">
-                <input type="text" name="name" placeholder="Ismingiz..." required>
-                <input type="email" name="email" placeholder="Email manzil..." required>
+            <!-- Form -->
+            <div class="col-12 col-lg-7">
+                <div class="contact-card">
+                    <p class="card-label"><i class="fa-regular fa-paper-plane"></i> Xabar yuborish</p>
+
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="row g-3 mb-3">
+                            <div class="col-12 col-sm-6">
+                                <input type="text" name="name" placeholder="Ismingiz..." required
+                                    class="form-control form-control-dark">
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <input type="email" name="email" placeholder="Email manzil..." required
+                                    class="form-control form-control-dark">
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mb-3">
+                            <div class="col-12 col-sm-6">
+                                <input type="tel" name="phone" placeholder="Telefon raqam..."
+                                    class="form-control form-control-dark">
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <input type="text" name="subject" placeholder="Xabar mavzusi..."
+                                    class="form-control form-control-dark">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <textarea name="message" required rows="6" placeholder="Xabaringizni yozing..."
+                                class="form-control form-control-dark"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit">
+                            <i class="fa-regular fa-paper-plane"></i> Xabarni yuborish
+                        </button>
+
+                    </form>
+                </div>
             </div>
 
-            <div class="form-row">
-                <input type="tel" name="phone" placeholder="Telefon raqam...">
-                <input type="text" name="subject" placeholder="Xabar mavzusi...">
+            <!-- Contact Info -->
+            <div class="col-12 col-lg-5">
+                <div class="contact-card">
+                    <p class="card-label"><i class="fa-regular fa-address-book"></i> Bog'lanish ma'lumotlari</p>
+
+                    <ul class="contact-info-list">
+
+                        <li>
+                            <span class="icon-box"><i class="fa-regular fa-envelope"></i></span>
+                            <a href="mailto:xasanbayevturdiali92@gmail.com">xasanbayevturdiali92@gmail.com</a>
+                        </li>
+
+                        <li>
+                            <span class="icon-box"><i class="fa-solid fa-phone"></i></span>
+                            <span>+998 88 416 20 60</span>
+                        </li>
+
+                        <li>
+                            <span class="icon-box"><i class="fa-brands fa-telegram"></i></span>
+                            <a href="https://t.me/turdialixasanbayev" target="_blank">@turdialixasanbayev</a>
+                        </li>
+
+                        <li>
+                            <span class="icon-box"><i class="fa-solid fa-location-dot"></i></span>
+                            <span>Bekobod, Toshkent</span>
+                        </li>
+
+                    </ul>
+
+                    <p class="contact-note">
+                        <i class="fa-regular fa-clock"></i>
+                        Xabaringiz imkon qadar tezroq ko'rib chiqiladi va sizga javob qaytariladi.
+                    </p>
+
+                </div>
             </div>
 
-            <textarea name="message" required rows="6" placeholder="Xabaringizni yozing..."></textarea>
-
-            <button type="submit" class="btn submit-btn">
-                Xabarni yuborish
-            </button>
-        </form>
-
-        <aside class="contact-info">
-            <h3>Bog'lanish ma'lumotlari</h3>
-            <ul>
-                <li><strong>Email:</strong>xasanbayevturdiali92@gmail.com</li>
-                <li><strong>Telefon:</strong>+998 88 416 20 60</li>
-                <li>
-                    <strong>
-                        <i class="fa-brands fa-telegram"></i>
-                        Telegram:
-                    </strong>
-                    <a href="https://t.me/turdialixasanbayev" target="_blank">
-                        @turdialixasanbayev
-                    </a>
-                </li>
-
-                <li><strong>Manzil:</strong> Bekobod, Toshkent</li>
-            </ul>
-
-            <p class="contact-note">
-                Xabaringiz imkon qadar tezroq ko'rib chiqiladi
-            </p>
-        </aside>
-
+        </div>
     </div>
-
 </section>
 
 {% endblock %}
@@ -81,16 +359,12 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const messages = document.querySelectorAll(".alert");
-
         messages.forEach((msg) => {
             setTimeout(() => {
                 msg.style.transition = "opacity 0.5s ease";
                 msg.style.opacity = "0";
-
-                setTimeout(() => {
-                    msg.remove();
-                }, 500); // fade tugagach DOMdan o‘chirish
-            }, 3000); // 3 soniya kutadi
+                setTimeout(() => { msg.remove(); }, 500);
+            }, 3000);
         });
     });
 </script>

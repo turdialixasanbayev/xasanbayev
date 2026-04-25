@@ -2,18 +2,97 @@
 
 {% load static %}
 
-{% block title %}404|xasanbayev.uz{% endblock %}
+{% block title %}404 | xasanbayev.uz{% endblock %}
+
+{% block extra_css %}
+
+<style>
+    .error-page {
+        min-height: calc(100vh - 140px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 4rem 0;
+    }
+
+    .error-code {
+        font-family: var(--font-display);
+        font-size: clamp(7rem, 20vw, 14rem);
+        font-weight: 800;
+        line-height: 1;
+        color: transparent;
+        -webkit-text-stroke: 2px var(--accent);
+        letter-spacing: -0.05em;
+        opacity: 0.15;
+        user-select: none;
+        margin-bottom: 0;
+    }
+
+    .error-title {
+        font-family: var(--font-display);
+        font-size: clamp(1.4rem, 4vw, 2.2rem);
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-top: -1.5rem;
+        margin-bottom: 1rem;
+        letter-spacing: -0.02em;
+    }
+
+    .error-text {
+        font-family: var(--font-mono);
+        font-size: 0.88rem;
+        color: var(--text-muted);
+        max-width: 420px;
+        margin: 0 auto 2.5rem;
+        line-height: 1.8;
+    }
+
+    .btn-home {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--bg-primary);
+        background-color: var(--accent);
+        border: none;
+        padding: 0.75rem 2rem;
+        border-radius: 4px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-home:hover {
+        opacity: 0.85;
+        transform: translateY(-2px);
+        color: var(--bg-primary);
+    }
+</style>
+
+{% endblock %}
 
 {% block content %}
 
-<section class="section error-page">
-    <div class="container error-container">
-        <h1 class="error-code">404</h1>
-        <h2 class="error-title">Sahifa topilmadi!</h2>
-        <p class="error-text">
-            Voy! Bu sahifa yo'qdek 😅 Balki u o'chirilgan yoki siz noto'g'ri manzilga kirdingiz
-        </p>
-        <a href="{% url 'home' %}" class="btn">🏠 Bosh sahifaga qaytish</a>
+<section class="error-page">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+
+                <p class="error-code">404</p>
+                <h1 class="error-title">Sahifa topilmadi!</h1>
+                <p class="error-text">
+                    Voy! Bu sahifa yo'qdek 😅 Balki u o'chirilgan yoki siz noto'g'ri manzilga kirdingiz.
+                </p>
+                <a href="{% url 'home' %}" class="btn-home">
+                    <i class="fa-solid fa-house"></i> Bosh sahifaga qaytish
+                </a>
+
+            </div>
+        </div>
     </div>
 </section>
 

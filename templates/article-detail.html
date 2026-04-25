@@ -2,34 +2,225 @@
 
 {% load static %}
 
-{% block title %}{{ article.name }}|xasanbayev.uz{% endblock %}
+{% block title %}{{ article.name }} | xasanbayev.uz{% endblock %}
+
+{% block extra_css %}
+
+<style>
+    .blog-detail {
+        padding: 5rem 0;
+    }
+
+    /* ── BACK LINK ── */
+    .back-link {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 2.5rem;
+        transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+        color: var(--accent);
+    }
+
+    /* ── HEADER ── */
+    .blog-title {
+        font-family: var(--font-display);
+        font-size: clamp(1.8rem, 5vw, 2.8rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: var(--text-primary);
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
+    }
+
+    /* ── META ── */
+    .blog-detail-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin-bottom: 2.5rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .meta-item {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.06em;
+        color: var(--text-muted);
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        padding: 0.3rem 0.85rem;
+        border-radius: 4px;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    .meta-item i {
+        color: var(--accent);
+        font-size: 0.68rem;
+        opacity: 0.8;
+    }
+
+    .meta-item.tag {
+        color: var(--accent);
+        background: var(--accent-dim);
+        border-color: rgba(0, 255, 136, 0.15);
+    }
+
+    /* ── CONTENT ── */
+    .blog-content-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 2.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .blog-description {
+        font-family: var(--font-mono);
+        font-size: 0.9rem;
+        color: #999;
+        line-height: 2;
+        white-space: pre-line;
+        margin: 0;
+    }
+
+    /* ── IMAGE ── */
+    .blog-main-img {
+        width: 100%;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        margin-top: 2rem;
+        display: block;
+    }
+
+    /* ── FOOTER ── */
+    .blog-footer-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border);
+        margin-top: 1rem;
+    }
+
+    .btn-back {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-primary);
+        background: transparent;
+        border: 1px solid var(--border);
+        padding: 0.6rem 1.25rem;
+        border-radius: 4px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .btn-back:hover {
+        border-color: var(--accent);
+        background: var(--accent-dim);
+        color: var(--accent);
+    }
+
+    .share-text {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 767px) {
+        .blog-detail {
+            padding: 3rem 0;
+        }
+
+        .blog-content-card {
+            padding: 1.5rem;
+        }
+
+        .blog-footer-bar {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+</style>
+
+{% endblock %}
 
 {% block content %}
 
-<article class="section blog-detail">
+<section class="blog-detail">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-9">
 
-    <header class="blog-header">
-        <h1 class="blog-title">{{ article.name }}</h1>
+                <!-- Back -->
+                <a href="{% url 'articles' %}" class="back-link">
+                    <i class="fa-solid fa-arrow-left"></i> Barcha maqolalar
+                </a>
 
-        <div class="blog-detail-meta">
-            <span>📅 {{ article.created_at|date }}</span>
-            <span>🏷 {{ article.category }}</span>
-            <span>👁️ {{ article.views }} marta ko'rildi</span>
-            <span>✍️ {{ article.author.get_full_name|default:article.author.username }}</span>
+                <!-- Title -->
+                <h1 class="blog-title">{{ article.name }}</h1>
+
+                <!-- Meta -->
+                <div class="blog-detail-meta">
+                    <span class="meta-item">
+                        <i class="fa-regular fa-calendar"></i>
+                        {{ article.created_at|date }}
+                    </span>
+                    {% if article.category %}
+                    <span class="meta-item tag">
+                        <i class="fa-solid fa-tag"></i>
+                        {{ article.category }}
+                    </span>
+                    {% endif %}
+                    <span class="meta-item">
+                        <i class="fa-regular fa-eye"></i>
+                        {{ article.views }} marta ko'rildi
+                    </span>
+                    <span class="meta-item">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                        {{ article.author.get_full_name|default:article.author.username }}
+                    </span>
+                </div>
+
+                <!-- Content -->
+                <div class="blog-content-card">
+                    <p class="blog-description">{{ article.description }}</p>
+                    {% if article.image %}
+                    <img src="{{ article.image.url }}" alt="{{ article.name }}" class="blog-main-img">
+                    {% endif %}
+                </div>
+
+                <!-- Footer -->
+                <div class="blog-footer-bar">
+                    <a href="{% url 'articles' %}" class="btn-back">
+                        <i class="fa-solid fa-arrow-left"></i> Barcha maqolalar
+                    </a>
+                    <span class="share-text">xasanbayev.uz</span>
+                </div>
+
+            </div>
         </div>
-    </header>
-
-    <section class="blog-content">
-        <p>{{ article.description }}</p>
-        {% if article.image %}
-        <img src="{{ article.image.url }}" alt="{{ article.name }}" class="blog-main-img">
-        {% endif %}
-    </section>
-
-    <footer class="blog-footer">
-        <a href="{% url 'articles' %}" class="btn outline">← Barcha maqolalar</a>
-    </footer>
-
-</article>
+    </div>
+</section>
 
 {% endblock %}

@@ -2,37 +2,288 @@
 
 {% load static %}
 
-{% block title %}Bosh sahifa|xasanbayev.uz{% endblock %}
+{% block title %}Bosh sahifa | xasanbayev.uz{% endblock %}
+
+{% block extra_css %}
+
+<style>
+    .hero {
+        min-height: calc(100vh - 70px);
+        display: flex;
+        align-items: center;
+        padding: 5rem 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* subtle grid background */
+    .hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image:
+            linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+        background-size: 48px 48px;
+        pointer-events: none;
+    }
+
+    /* glow blob */
+    .hero::after {
+        content: '';
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(0, 255, 136, 0.06) 0%, transparent 70%);
+        top: -100px;
+        right: -100px;
+        pointer-events: none;
+        border-radius: 50%;
+    }
+
+    /* ── TEXT SIDE ── */
+    .hero-label {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1.25rem;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    .hero-label::before {
+        content: '';
+        display: inline-block;
+        width: 28px;
+        height: 1px;
+        background: var(--accent);
+    }
+
+    .hero-title {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 5vw, 3.6rem);
+        font-weight: 800;
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        color: var(--text-primary);
+        margin-bottom: 1.25rem;
+    }
+
+    .hero-title span {
+        color: var(--accent);
+        display: block;
+    }
+
+    .hero-subtitle {
+        font-family: var(--font-mono);
+        font-size: 0.82rem;
+        color: var(--text-muted);
+        letter-spacing: 0.04em;
+        margin-bottom: 1.25rem;
+        line-height: 1.9;
+    }
+
+    .hero-subtitle strong {
+        color: var(--text-primary);
+        font-weight: 500;
+    }
+
+    .hero-desc {
+        font-size: 0.88rem;
+        color: #888;
+        max-width: 480px;
+        line-height: 1.9;
+        margin-bottom: 2.5rem;
+        border-left: 2px solid var(--border);
+        padding-left: 1rem;
+    }
+
+    /* ── BUTTONS ── */
+    .hero-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .btn-primary-custom {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--bg-primary) !important;
+        background-color: var(--accent);
+        border: 1px solid var(--accent);
+        padding: 0.7rem 1.75rem;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    .btn-primary-custom:hover {
+        opacity: 0.85;
+        transform: translateY(-2px);
+    }
+
+    .btn-outline-custom {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-primary) !important;
+        background: transparent;
+        border: 1px solid var(--border);
+        padding: 0.7rem 1.75rem;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    .btn-outline-custom:hover {
+        border-color: var(--accent);
+        background: var(--accent-dim);
+        transform: translateY(-2px);
+    }
+
+    /* ── IMAGE SIDE ── */
+    .hero-image-wrapper {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* ring decoration */
+    .hero-image-wrapper::before {
+        content: '';
+        position: absolute;
+        width: 320px;
+        height: 320px;
+        border-radius: 50%;
+        border: 1px dashed rgba(0, 255, 136, 0.2);
+        animation: spin 20s linear infinite;
+    }
+
+    .hero-image-wrapper::after {
+        content: '';
+        position: absolute;
+        width: 260px;
+        height: 260px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(0, 255, 136, 0.08) 0%, transparent 70%);
+    }
+
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    .hero-img {
+        width: 220px;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid rgba(0, 255, 136, 0.25);
+        position: relative;
+        z-index: 1;
+        filter: grayscale(20%);
+        transition: filter 0.3s ease;
+    }
+
+    .hero-img:hover {
+        filter: grayscale(0%);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 767px) {
+        .hero {
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .hero-label {
+            justify-content: center;
+        }
+
+        .hero-desc {
+            border-left: none;
+            padding-left: 0;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-buttons {
+            justify-content: center;
+        }
+
+        .hero-image-wrapper {
+            margin-bottom: 2.5rem;
+        }
+    }
+</style>
+
+{% endblock %}
 
 {% block content %}
 
-<section class="hero hero-layout section container">
+<section class="hero">
+    <div class="container">
+        <div class="row align-items-center g-5 flex-column-reverse flex-md-row">
 
-    <div class="hero-text">
-        <h1 class="hero-title">
-            Salom, men <span>Turdiali Xasanbayev</span>
-        </h1>
+            <!-- Text -->
+            <div class="col-12 col-md-7 col-lg-7">
+                <p class="hero-label">Python Django Developer</p>
 
-        <p class="hero-subtitle">
-            Tezkor, kengaytiriladigan va ishonchli web ilovalar yarataman <br>
-            Python • Django • DRF • REST API
-        </p>
+                <h1 class="hero-title">
+                    Salom, men
+                    <span>Turdiali Xasanbayev</span>
+                </h1>
 
-        <p class="hero-desc">
-            Yuqori samaradorlikka ega backend tizimlar va REST API'lar yarataman.
-            Django ekotizimi orqali barqaror va kengaytiriladigan loyihalar ustida ishlayman
-        </p>
+                <p class="hero-subtitle">
+                    <strong>Python</strong> &nbsp;•&nbsp;
+                    <strong>Django</strong> &nbsp;•&nbsp;
+                    <strong>DRF</strong> &nbsp;•&nbsp;
+                    <strong>REST API</strong>
+                </p>
 
-        <div class="buttons">
-            <a class="btn" href="{% url 'projects' %}">Loyihalar</a>
-            <a class="btn outline" href="{% url 'contact-us' %}">Aloqa</a>
+                <p class="hero-desc">
+                    Tezkor, kengaytiriladigan va ishonchli web ilovalar yarataman.
+                    Yuqori samaradorlikka ega backend tizimlar va REST API'lar ustida ishlayman.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="{% url 'projects' %}" class="btn-primary-custom">
+                        <i class="fa-solid fa-code-branch"></i> Loyihalar
+                    </a>
+                    <a href="{% url 'contact-us' %}" class="btn-outline-custom">
+                        <i class="fa-regular fa-envelope"></i> Aloqa
+                    </a>
+                </div>
+            </div>
+
+            <!-- Image -->
+            <div class="col-12 col-md-5 col-lg-5">
+                <div class="hero-image-wrapper">
+                    <img src="{% static 'main/img/image.png' %}" alt="Turdiali Xasanbayev" class="hero-img">
+                </div>
+            </div>
+
         </div>
     </div>
-
-    <div class="hero-image">
-        <img src="{% static 'main/img/image.png' %}" alt="Turdiali Xasanbayev">
-    </div>
-
 </section>
 
 {% endblock %}

@@ -1,23 +1,75 @@
 {% load static %}
 
-<header class="header">
-    <div class="container navbar">
-        <h1 class="logo">xasanbayev<span>.uz</span></h1>
-        <nav class="nav-links">
-            <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Bosh
-                sahifa</a>
-            <a href="{% url 'about' %}"
-                class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">Haqida</a>
-            <a href="{% url 'skills' %}"
-                class="{% if request.resolver_match.url_name == 'skills' %}active{% endif %}">Ko'nikmalar</a>
-            <a href="{% url 'projects' %}"
-                class="{% if request.resolver_match.url_name == 'projects' %}active{% endif %}">Loyihalar</a>
-            <a href="{% url 'articles' %}"
-                class="{% if request.resolver_match.url_name == 'articles' %}active{% endif %}">Maqolalar</a>
-            <a href="{% url 'contact-us' %}"
-                class="{% if request.resolver_match.url_name == 'contact-us' %}active{% endif %}">Aloqa</a>
-            <a href="{% url 'resume' %}"
-                class="{% if request.resolver_match.url_name == 'resume' %}active{% endif %}">Resume</a>
-        </nav>
-    </div>
+<header>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+
+            <!-- Logo -->
+            <a class="navbar-brand" href="{% url 'home' %}">
+                xasanbayev<span>.uz</span>
+            </a>
+
+            <!-- Mobile toggle -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                aria-controls="mainNav" aria-expanded="false" aria-label="Menyuni ochish">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Nav links -->
+            <div class="collapse navbar-collapse justify-content-end" id="mainNav">
+                <ul class="navbar-nav gap-1">
+
+                    <li class="nav-item">
+                        <a href="{% url 'home' %}"
+                            class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                            Bosh sahifa
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'about' %}"
+                            class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+                            Haqida
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'skills' %}"
+                            class="nav-link {% if request.resolver_match.url_name == 'skills' %}active{% endif %}">
+                            Ko'nikmalar
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'projects' %}"
+                            class="nav-link {% if request.resolver_match.url_name == 'projects' %}active{% endif %}">
+                            Loyihalar
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'articles' %}"
+                            class="nav-link {% if request.resolver_match.url_name == 'articles' %}active{% endif %}">
+                            Maqolalar
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'contact-us' %}"
+                            class="nav-link {% if request.resolver_match.url_name == 'contact-us' %}active{% endif %}">
+                            Aloqa
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'resume' %}"
+                            class="nav-link {% if request.resolver_match.url_name == 'resume' %}active{% endif %}">
+                            Resume
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
 </header>

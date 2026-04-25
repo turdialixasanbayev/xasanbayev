@@ -2,33 +2,186 @@
 
 {% load static %}
 
-{% block title %}{{ project.name }}|xasanbayev.uz{% endblock %}
+{% block title %}{{ project.name }} | xasanbayev.uz{% endblock %}
+
+{% block extra_css %}
+
+<style>
+    .project-detail {
+        padding: 5rem 0;
+    }
+
+    /* ── BACK LINK ── */
+    .back-link {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 2.5rem;
+        transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+        color: var(--accent);
+    }
+
+    /* ── TITLE ── */
+    .project-title {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: var(--text-primary);
+        margin-bottom: 2rem;
+        line-height: 1.15;
+    }
+
+    /* ── CARDS ── */
+    .detail-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 2rem;
+        transition: border-color 0.2s ease;
+    }
+
+    .detail-card:hover {
+        border-color: rgba(0, 255, 136, 0.2);
+    }
+
+    .card-label {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1.25rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    /* ── DESCRIPTION ── */
+    .project-detail-desc {
+        font-family: var(--font-mono);
+        font-size: 0.88rem;
+        color: #888;
+        line-height: 1.95;
+        margin: 0;
+        border-left: 2px solid var(--accent);
+        padding-left: 1.25rem;
+    }
+
+    /* ── TECH TAGS ── */
+    .project-tech {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+    }
+
+    .project-tech span {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.06em;
+        color: var(--accent);
+        background: var(--accent-dim);
+        border: 1px solid rgba(0, 255, 136, 0.15);
+        padding: 0.3rem 0.85rem;
+        border-radius: 4px;
+    }
+
+    /* ── BUTTONS ── */
+    .btn-project-link {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--bg-primary);
+        background: var(--accent);
+        border: none;
+        padding: 0.75rem 2rem;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-project-link:hover {
+        opacity: 0.85;
+        transform: translateY(-2px);
+        color: var(--bg-primary);
+    }
+
+    @media (max-width: 767px) {
+        .project-detail {
+            padding: 3rem 0;
+        }
+
+        .btn-project-link {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+
+{% endblock %}
 
 {% block content %}
 
-<section class="section project-detail container">
+<section class="project-detail">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-9">
 
-    <a href="{% url 'projects' %}" class="back-link">← Barcha loyihalar</a>
+                <!-- Back -->
+                <a href="{% url 'projects' %}" class="back-link">
+                    <i class="fa-solid fa-arrow-left"></i> Barcha loyihalar
+                </a>
 
-    <h1 class="project-title">{{ project.name }}</h1>
+                <!-- Title -->
+                <h1 class="project-title">{{ project.name }}</h1>
 
-    <p class="project-detail-desc">
-        {{ project.description }}
-    </p>
+                <div class="d-flex flex-column gap-4">
 
-    <h3>Ishlatilgan texnologiyalar</h3>
-    <div class="project-tech">
-        {% for tech in project.technologies.all %}
-        <span>{{ tech.name }}</span>
-        {% endfor %}
+                    <!-- Description -->
+                    <div class="detail-card">
+                        <p class="card-label"><i class="fa-regular fa-file-lines"></i> Loyiha haqida</p>
+                        <p class="project-detail-desc">{{ project.description }}</p>
+                    </div>
+
+                    <!-- Technologies -->
+                    <div class="detail-card">
+                        <p class="card-label"><i class="fa-solid fa-code"></i> Ishlatilgan texnologiyalar</p>
+                        <div class="project-tech">
+                            {% for tech in project.technologies.all %}
+                            <span>{{ tech.name }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Link -->
+                    {% if project.link %}
+                    <div class="detail-card">
+                        <p class="card-label"><i class="fa-solid fa-link"></i> Loyiha manzili</p>
+                        <a href="{{ project.link }}" target="_blank" class="btn-project-link">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Loyihaga o'tish
+                        </a>
+                    </div>
+                    {% endif %}
+
+                </div>
+
+            </div>
+        </div>
     </div>
-
-    <div class="project-links">
-        <a href="{{ project.link }}" target="_blank" class="btn">
-            Link
-        </a>
-    </div>
-
 </section>
 
 {% endblock %}
