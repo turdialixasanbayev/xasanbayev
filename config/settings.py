@@ -33,6 +33,12 @@ ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = True
 
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+SESSION_COOKIE_AGE = 60 * 60 * 24  # 86400 sekund (1 kun)
+SESSION_SAVE_EVERY_REQUEST = True
+
 # Application definition
 
 DEFAULT_APPS = [
@@ -60,6 +66,9 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+
+    'config.middleware.HostBasedRoutingMiddleware', # admin route
+
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
